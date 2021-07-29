@@ -3,26 +3,21 @@
  * @param {number} target
  * @return {number[]}
  */
+
 var twoSum = function(nums, target) {
-    let indOne;
+    let hashTable = {};
     let result = [];
     
     for (let i = 0; i < nums.length; i++) {
-        if (result.length !== 2) {
-            let indOne = i;
-            let numOne = nums[i];
-
-            for (let t = 0; t < nums.length; t++) {
-                if (i !== t) {
-                    let indTwo = t;
-                    let numTwo = nums[t];
-                    if (numOne + numTwo === target) {
-                        result.push(indOne);
-                        result.push(indTwo);
-                        break;
-                    }
-                }
-            }            
+        let currentNum = nums[i];
+        let diff = target - currentNum;
+        
+        if (hashTable[diff] !== undefined) {
+            result.push(i);
+            result.push(hashTable[diff]);
+            return result;
+        } else {   
+            hashTable[currentNum] = i;
         }
     }
     
