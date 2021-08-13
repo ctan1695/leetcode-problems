@@ -28,8 +28,5 @@ var searchInsert = function(nums, target) {
         } else {
             maxIndex = guessIndex - 1;
         }        
-    }
-    
-    return -1;
-    
+    }    
 };
