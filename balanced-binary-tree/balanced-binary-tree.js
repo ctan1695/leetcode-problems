@@ -19,14 +19,41 @@ var isBalanced = function(root) {
     }
 
     let findDepth = (rootNode) => {
-        if (!rootNode) {
-            return 0;
+        let queue = [];
+        let nodesPerLevel = 0;
+        let depth = 0;
+        
+        if (rootNode) {
+            queue.push(rootNode);    
+        } else {
+            return depth;   
         }
         
-        let leftDepth = findDepth(rootNode.left);
-        let rightDepth = findDepth(rootNode.right);
+        while (queue.length > 0) {
+            nodesPerLevel = queue.length;
+            
+            if (nodesPerLevel === 0) {
+                return depth;
+            } 
+            
+            depth++;
+            
+            while (nodesPerLevel > 0) {
+                let curr = queue.shift();
+                
+                if (curr.left) {
+                    queue.push(curr.left);
+                }
+                
+                if (curr.right) {
+                    queue.push(curr.right);
+                }
+                
+                nodesPerLevel--;
+            }
+        }
         
-        return Math.max(leftDepth + 1, rightDepth + 1);
+        return depth;
     }    
     
     while (allNodes.length > 0) {
