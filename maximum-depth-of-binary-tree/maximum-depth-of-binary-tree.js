@@ -11,27 +11,39 @@
  * @return {number}
  */
 let maxDepth = (root) => {
-    let maxCount = 0;
+    let queue = [];
+    let numNodes = 0;
+    let height = 0;
     
-    let drillDown = (rootNode, counter) => {
-        if (!rootNode || rootNode.val === null) {
-            if (maxCount < counter) {
-                maxCount = counter;
-            }
-            counter = 0;
-            return;
-        }
-    
-
-        counter++;    
-
-        drillDown(rootNode.left, counter);
-
-        drillDown(rootNode.right, counter);            
-
+    if (root) {
+        queue.push(root);    
+    } else {
+        return height;
     }
     
-    drillDown(root, 0);
+    while (queue.length > 0) {
+        numNodes = queue.length;
+        
+        if (numNodes === 0) {
+            return height;
+        }
+        
+        height++;
+        
+        while (numNodes > 0) {
+            let curr = queue.shift();
+            
+            if (curr.left) {
+                queue.push(curr.left);
+            }
+            
+            if (curr.right) {
+                queue.push(curr.right);
+            }
+            
+            numNodes--;
+        }
+    }
     
-    return maxCount;
-} 
+    return height;
+}
