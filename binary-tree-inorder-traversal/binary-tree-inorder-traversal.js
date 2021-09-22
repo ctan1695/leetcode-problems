@@ -15,7 +15,7 @@ var inorderTraversal = function(root) {
     let output = [];
     let curr = root;
     
-    while (root) {
+    while (curr || stack.length > 0) {
         while (curr !== null) {           
             stack.push(curr);    
             
@@ -25,31 +25,7 @@ var inorderTraversal = function(root) {
         let popped = stack.pop();
         output.push(popped.val);
         curr = popped.right;
-        
-        if (!curr && stack.length === 0) {
-            break;
-        }
     }
     
     return output;
 };
-
-
-/*
-    let result = [];
-    
-    let traverse = (rootNode) => {
-        
-        if (rootNode === null) {
-            return;
-        }
-        
-        traverse(rootNode.left);
-        result.push(rootNode.val);
-        traverse(rootNode.right);
-    }
-    
-    traverse(root);
-    
-    return result;
-*/
